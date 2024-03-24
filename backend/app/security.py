@@ -23,7 +23,7 @@ def generate_access_token(user_id: str) -> str:
     expiration_time = datetime.utcnow() + ACCESS_TOKEN_EXPIRATION
     payload = {
         "user_id": user_id,
-        "exp": expiration_time  # Set the expiration time in the payload
+        "exp": expiration_time  
     }
     token = jwt.encode(payload, JWT_SECRET, algorithm="HS256")
     return token
@@ -32,7 +32,7 @@ def generate_refresh_token(user_id: str) -> str:
     expiration_time = datetime.utcnow() + REFRESH_TOKEN_EXPIRATION
     payload = {
         "user_id": user_id,
-        "exp": expiration_time  # Set the expiration time in the payload
+        "exp": expiration_time  
     }
     token = jwt.encode(payload, JWT_SECRET, algorithm="HS256")
     return token

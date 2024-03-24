@@ -16,18 +16,6 @@ logger = logging.getLogger(__name__)
 cache = TTLCache(maxsize=100, ttl=300)
 
 
-# def invalidate_cache():
-#     cache.delete("filter_cars")
-#     cache.delete("search_cars")
-
-
-# def cache_invalidator(func):
-#     async def wrapper(*args, **kwargs):
-#         result = await func(*args, **kwargs)
-#         invalidate_cache()
-#         return result
-
-#     return wrapper
 
 def invalidate_cache(*args, **kwargs):
     for key in list(cache):
@@ -35,7 +23,6 @@ def invalidate_cache(*args, **kwargs):
             cache.pop(key)
 
 @router.post("/", response_model=dict)
-# @cache_invalidator
 def create_car(car: CarCreateSchema, current_user : User=Depends(authenticate_user)):
     try:
         new_car = Car(make=car.make, model=car.model, engine_capacity=car.engine_capacity,
@@ -50,7 +37,6 @@ def create_car(car: CarCreateSchema, current_user : User=Depends(authenticate_us
 
 
 @router.put("/{car_id}", response_model=dict)
-# @cache_invalidator
 def update_car(car_id: str, car_data: CarUpdateSchema, current_user:User=Depends(authenticate_user)):
     try:
         car = Car.objects(id=car_id).first()
@@ -68,7 +54,6 @@ def update_car(car_id: str, car_data: CarUpdateSchema, current_user:User=Depends
 
 
 @router.delete("/{car_id}", response_model=dict)
-# @cache_invalidator
 def delete_car(car_id: str,
                current_user: User = Depends(authenticate_user)):
     try:

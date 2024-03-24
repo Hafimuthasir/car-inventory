@@ -4,7 +4,6 @@ from app.models import User
 
 """ Authentication Schemas """
 class LoginSchema(BaseModel):
-    # grant_type:Optional[str] = None
     username: str
     password: str
 
@@ -13,10 +12,6 @@ class RefreshTokenSchema(BaseModel):
 
 
 """ User Schemas """
-# class UserCreateSchema(BaseModel):
-#     username: str
-#     email: str
-#     password: str
 
 class UserCreateSchema(BaseModel):
     username: constr(min_length=4, max_length=50)  
