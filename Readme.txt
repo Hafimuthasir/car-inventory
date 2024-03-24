@@ -50,16 +50,14 @@ This application provide users with a seamless experience in managing their car 
 Before you begin, ensure you have the following installed:
 - Python
 - Node.js and npm
+- MongoDB
 
 ### Installation
 1. **Clone the repository:**
     ```bash
-    git clone https://github.com/your-repo-name.git
+    git clone https://github.com/Hafimuthasir/car-inventory.git
     ```
 2. **Navigate to the project directory:**
-    ```bash
-    cd your-project-directory
-    ```
 
 ## Backend Setup
 
@@ -74,7 +72,9 @@ Before you begin, ensure you have the following installed:
     ```bash
     pip install -r requirements.txt
     ```
-(Have not configured the setup of environment variables to simplify the testing process.)
+3. **Configure the mongodb database name and connection in main.py based on your setup**
+
+(Haven't configured the setup of environment variables to simplify the testing process.)
 
 
 ### Running the Backend Server
