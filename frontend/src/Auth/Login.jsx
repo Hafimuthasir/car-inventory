@@ -4,7 +4,6 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import api from './axiosinstance';
 import { toast } from 'react-toastify';
-// import { Toast, } from 'react-toastify/dist/components';
 
 function Login() {
   const [username, setUsername] = useState('');

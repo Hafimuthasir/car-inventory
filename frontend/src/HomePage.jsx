@@ -16,7 +16,7 @@ const HomePage = () => {
     const [filterApplied, setFilterAppleid] = useState(false)
     const [searchInput, setSearchInput] = useState('')
     const navigate = useNavigate();
-    const {logout, setSelectedCar} = useAuth()
+    const { logout, setSelectedCar } = useAuth()
 
     useEffect(() => {
         fetchCars();
@@ -51,7 +51,7 @@ const HomePage = () => {
             }
             onCloseFilter();
         } catch (error) {
-            
+
             console.error(error.response.data.detail[0]['loc'][1]);
             let field = error.response.data.detail[0]['loc'][1]
             let er = error.response.data.detail[0]['msg']
@@ -63,26 +63,26 @@ const HomePage = () => {
 
     const handleSearch = () => {
         api.get('/cars/search/', {
-                params: {'keyword':searchInput}
-            }).then((response)=>{
-                console.log(response.data);
-                setCars(response.data)
-            }).catch((error)=>{
-                console.error('Error searching cars:', error);
-            })
-        
+            params: { 'keyword': searchInput }
+        }).then((response) => {
+            console.log(response.data);
+            setCars(response.data)
+        }).catch((error) => {
+            console.error('Error searching cars:', error);
+        })
+
     };
 
     const handleDelete = (car_id) => {
         console.log(car_id);
-        api.delete(`/cars/${car_id}`).then((response)=>{
-            if (response.status === 200){
+        api.delete(`/cars/${car_id}`).then((response) => {
+            if (response.status === 200) {
                 fetchCars()
                 setSearchInput('')
             }
         })
     }
-    
+
 
     const handleAddCarClick = () => {
         // navigate('/add-car');
@@ -121,11 +121,16 @@ const HomePage = () => {
         <div className="container mx-auto p-8">
             <AddCarModal isOpen={isOpenAdd} onClose={onCloseAdd} updateData={fetchCars} />
             <FilterModal isOpen={isOpenFilter} onClose={onCloseFilter} onFilter={handleFilter} />
-            <EditCarModal isOpen={isOpenEdit} onClose={()=>setIsOpenEdit(false)} updateData={fetchCars} />
+            <EditCarModal isOpen={isOpenEdit} onClose={() => setIsOpenEdit(false)} updateData={fetchCars} />
 
             <h2 className="text-2xl font-bold mb-4">List of Cars</h2>
             <div className="flex justify-between mb-4">
                 <button onClick={handleAddCarClick} className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="white" class="inline-block mr-2 mb-1">
+                        <circle cx="12" cy="12" r="10" fill="none" stroke="white" stroke-width="2" />
+                        <line x1="12" y1="6" x2="12" y2="18" stroke="white" stroke-width="2" />
+                        <line x1="6" y1="12" x2="18" y2="12" stroke="white" stroke-width="2" />
+                    </svg>
                     Add Car
                 </button>
                 <div className='flex flex-row gap-1'>
@@ -138,13 +143,19 @@ const HomePage = () => {
                         </button>
                     }
                     <div className="flex">
-                        <input type="text" onChange={(e)=>setSearchInput(e.target.value)} placeholder="Search..." className="border border-gray-300 rounded-l px-4 py-2 outline-none" />
+                        <input type="text" onChange={(e) => setSearchInput(e.target.value)} placeholder="Search..." className="border border-gray-300 rounded-l px-4 py-2 outline-none" />
                         <button onClick={handleSearch} className="bg-gray-300 hover:bg-gray-400 text-gray-700 font-bold py-2 px-4 rounded-r">
                             Search
                         </button>
                     </div>
 
-                    <button onClick={logout}>Logout</button>
+                    <button className="bg-orange-700 hover:bg-orange-800 text-white font-bold py-2 px-4 rounded" onClick={logout}>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="white" className="inline-block mr-2">
+                            <path fill="none" d="M0 0h24v24H0z" />
+                            <path d="M7 3a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v18l-4-4H9a2 2 0 0 1-2-2V3zm10 6h-6a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-8a1 1 0 0 0-1-1z" />
+                        </svg>
+                        Logout
+                    </button>
 
                 </div>
             </div>
@@ -168,12 +179,12 @@ const HomePage = () => {
                             <td className="py-2 px-4 border border-gray-200">{car.power}</td>
                             <td className="py-2 px-4 border border-gray-200">{car.torque}</td>
                             <td className="py-2 px-4 border border-gray-200">
-                            
-                                <button onClick={()=>{setSelectedCar(car), setIsOpenEdit(true)}} className='bg-blue-500 hover:bg-blue-600 text-white font-bold py-1 px-2 rounded'>
+
+                                <button onClick={() => { setSelectedCar(car), setIsOpenEdit(true) }} className='bg-blue-500 hover:bg-blue-600 text-white font-bold py-1 px-2 rounded'>
                                     Edit
                                 </button>
-                                <button onClick={()=>{handleDelete(car._id)}} className='ml-2 bg-red-800 hover:bg-red-900 text-white font-bold py-1 px-2 rounded'>
-                                Delete
+                                <button onClick={() => { handleDelete(car._id) }} className='ml-2 bg-red-800 hover:bg-red-900 text-white font-bold py-1 px-2 rounded'>
+                                    Delete
                                 </button>
                             </td>
                         </tr>
