@@ -98,9 +98,10 @@ uvicorn main:app --reload
    npm run dev
 
 
-Using the Application
+### Using the Application
+
 Logging In
-Access the application at http://localhost:3000.
+Access the application at http://localhost:5173(vite default host).
 Make your account by going to signup page
 Login using created credentials.
 Navigating the Dashboard
